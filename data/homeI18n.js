@@ -108,6 +108,9 @@ export const homeI18n = {
     languageSwitcher: '切换语言',
     languageLabelZh: '中',
     languageLabelEn: 'EN',
+    themeSwitcher: '切换主题',
+    themeLight: '日',
+    themeDark: '夜',
     terminalLabel: '终端介绍',
     terminalCommands: {
       whoami: 'whoami',
@@ -236,6 +239,9 @@ export const homeI18n = {
     languageSwitcher: 'Switch language',
     languageLabelZh: 'ZH',
     languageLabelEn: 'EN',
+    themeSwitcher: 'Switch theme',
+    themeLight: 'Day',
+    themeDark: 'Night',
     terminalLabel: 'Terminal introduction',
     terminalCommands: {
       whoami: 'whoami',

@@ -20,6 +20,7 @@ export default function Home() {
   const activeSectionRef = useRef('hero')
   const [activeSection, setActiveSection] = useState('hero')
   const [lang, setLang] = useState('zh')
+  const [theme, setTheme] = useState('dark')
 
   const t = homeI18n[lang]
 
@@ -29,13 +30,41 @@ export default function Home() {
   }, [])
 
   useEffect(() => {
+    const savedTheme = localStorage.getItem('theme')
+    const presetTheme = document.documentElement.dataset.theme
+
+    if (presetTheme === 'light' || presetTheme === 'dark') {
+      setTheme(presetTheme)
+      return
+    }
+
+    if (savedTheme === 'light' || savedTheme === 'dark') {
+      setTheme(savedTheme)
+      return
+    }
+
+    const mediaQuery = window.matchMedia('(prefers-color-scheme: light)')
+    setTheme(mediaQuery.matches ? 'light' : 'dark')
+  }, [])
+
+  useEffect(() => {
     document.documentElement.lang = lang
   }, [lang])
+
+  useEffect(() => {
+    document.documentElement.dataset.theme = theme
+  }, [theme])
 
   const toggleLang = (type) => {
     const next = type
     setLang(next)
     localStorage.setItem('lang', next)
+  }
+
+  const toggleTheme = (type) => {
+    const next = type
+    setTheme(next)
+    localStorage.setItem('theme', next)
   }
 
   const setSectionRef = (key) => (node) => {
@@ -166,11 +195,52 @@ export default function Home() {
                   </button>
                 ))}
               </nav>
+
               <div className="lang-toggle" aria-label={t.languageSwitcher}>
-                <span onClick={() => toggleLang('zh')} className='lang-toggle__item' style={{ color: lang === 'zh' ? 'var(--text)' : 'var(--text-muted)' }}>中</span>
-                <span className="lang-toggle__sep">/</span>
-                <span onClick={() => toggleLang('en')} className='lang-toggle__item' style={{ color: lang === 'en' ? 'var(--text)' : 'var(--text-muted)' }}>EN</span>
+                <button
+                  type="button"
+                  className={`lang-toggle__item ${lang === 'zh' ? 'is-active' : ''}`}
+                  onClick={() => toggleLang('zh')}
+                  aria-label={t.languageLabelZh}
+                  aria-pressed={lang === 'zh'}
+                >
+                  中
+                </button>
+                <button
+                  type="button"
+                  className={`lang-toggle__item ${lang === 'en' ? 'is-active' : ''}`}
+                  onClick={() => toggleLang('en')}
+                  aria-label={t.languageLabelEn}
+                  aria-pressed={lang === 'en'}
+                >
+                  EN
+                </button>
               </div>
+              {/* <div className="theme-toggle" aria-label={t.themeSwitcher}>
+                <button
+                  type="button"
+                  className={`theme-toggle__item ${theme === 'light' ? 'is-active' : ''}`}
+                  onClick={() => toggleTheme('light')}
+                  aria-label={t.themeLight}
+                  aria-pressed={theme === 'light'}
+                >
+                  <svg viewBox="0 0 24 24" aria-hidden="true">
+                    <circle cx="12" cy="12" r="4.25" />
+                    <path d="M12 1.75v2.5M12 19.75v2.5M4.75 4.75l1.8 1.8M17.45 17.45l1.8 1.8M1.75 12h2.5M19.75 12h2.5M4.75 19.25l1.8-1.8M17.45 6.55l1.8-1.8" />
+                  </svg>
+                </button>
+                <button
+                  type="button"
+                  className={`theme-toggle__item ${theme === 'dark' ? 'is-active' : ''}`}
+                  onClick={() => toggleTheme('dark')}
+                  aria-label={t.themeDark}
+                  aria-pressed={theme === 'dark'}
+                >
+                  <svg viewBox="0 0 24 24" aria-hidden="true">
+                    <path d="M20.08 14.64A8.75 8.75 0 1 1 9.36 3.92a7.1 7.1 0 0 0 10.72 10.72Z" />
+                  </svg>
+                </button>
+              </div> */}
             </div>
           </div>
         </header>
