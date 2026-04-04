@@ -61,12 +61,6 @@ export default function Home() {
     localStorage.setItem('lang', next)
   }
 
-  const toggleTheme = (type) => {
-    const next = type
-    setTheme(next)
-    localStorage.setItem('theme', next)
-  }
-
   const setSectionRef = (key) => (node) => {
     if (node) {
       sectionRefs.current[key] = node
@@ -182,7 +176,7 @@ export default function Home() {
               <span className="brandmark__dot" />
               <span>{t.brand}</span>
             </button>
-            <div style={{ display: 'flex', alignItems: 'center', gap: 5 }}>
+            <div className="nav-controls">
               <nav className="nav-links" aria-label="Primary">
                 {navItems.map((item) => (
                   <button
