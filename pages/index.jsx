@@ -1,209 +1,266 @@
 import Head from 'next/head'
-import { useEffect } from 'react'
+import { useCallback, useEffect, useRef, useState } from 'react'
+import { motion } from 'framer-motion'
+import { homeI18n, navItems, projects } from '@/data/homeI18n'
 
-const techGroups = [
-  {
-    title: 'Frontend',
-    items: [
-      { name: 'React / Next.js', subtitle: 'SPA, SSR, RSC aware UI architecture', level: '94%' },
-      { name: 'Tailwind CSS', subtitle: 'Design tokens and utility-first systems', level: '90%' },
-      { name: 'TypeScript', subtitle: 'Strict types for scalable frontend delivery', level: '92%' },
-      { name: 'ECharts', subtitle: 'Interactive dashboards and live data visuals', level: '86%' },
-    ],
-  },
-  {
-    title: 'Backend & DB',
-    items: [
-      { name: 'Node.js', subtitle: 'API, BFF and automation workflows', level: '88%' },
-      { name: 'Prisma', subtitle: 'Schema-first data modeling and migrations', level: '82%' },
-      { name: 'PostgreSQL', subtitle: 'Relational data design and query optimization', level: '84%' },
-      { name: 'Redis', subtitle: 'Caching, rate limit and queue support', level: '76%' },
-    ],
-  },
-  {
-    title: 'DevOps & Tools',
-    items: [
-      { name: 'Cloudflare', subtitle: 'Pages, Workers and edge-first deployment', level: '85%' },
-      { name: 'Docker', subtitle: 'Portable local and CI runtime environments', level: '79%' },
-      { name: 'Git / GitHub', subtitle: 'Branching, review and release workflow', level: '91%' },
-      { name: 'Supabase', subtitle: 'Rapid backend integration and auth setup', level: '80%' },
-    ],
-  },
-]
+const revealProps = {
+  initial: { opacity: 0, y: 24 },
+  whileInView: { opacity: 1, y: 0 },
+  viewport: { once: true, amount: 0.2 },
+  transition: { duration: 0.7, ease: [0.16, 1, 0.3, 1] },
+}
 
-const projects = [
-  {
-    id: '01',
-    title: 'RBAC + ABAC 权限管理后台',
-    description: '企业级混合权限模型，支持角色、属性、按钮级与数据级控制，适配复杂中后台业务权限拆分。',
-    tags: ['Admin', 'RBAC', 'ABAC', 'React'],
-  },
-  {
-    id: '02',
-    title: 'LowCode 动态表单设计器',
-    description: '通过拖拽式交互生成表单结构，自动输出 JSON Schema，降低运营配置门槛。',
-    tags: ['LowCode', 'Schema', 'DnD', 'TypeScript'],
-  },
-  {
-    id: '03',
-    title: '商品 SKU 与规格配置系统',
-    description: '支持多规格套餐组合与笛卡尔积算法计算，面向电商复杂商品配置场景。',
-    tags: ['E-commerce', 'Algorithm', 'SKU', 'Node.js'],
-  },
-  {
-    id: '04',
-    title: '运营数据可视化大屏',
-    description: '基于 ECharts 与 WebSocket 实现实时刷新，突出异常指标与业务趋势观察。',
-    tags: ['ECharts', 'WebSocket', 'Realtime', 'Dashboard'],
-  },
-  {
-    id: '05',
-    title: '个人品牌与作品展示平台',
-    description: '当前站点，采用静态部署思路构建，强调性能、辨识度与独立开发者表达。',
-    tags: ['Portfolio', 'Cloudflare Pages', 'Static', 'UX'],
-  },
-  {
-    id: '06',
-    title: 'Web3 数字钱包与交易前端',
-    description: '接入 Ethers.js 与 MetaMask，支持 ERC-20 资产交互与基础交易流程。',
-    tags: ['Web3', 'Ethers.js', 'MetaMask', 'ERC-20'],
-  },
-]
-
-const blogPosts = [
-  { date: '2026-03-18', title: '从权限粒度设计到前端落地 / Permission Models in Production' },
-  { date: '2026-02-07', title: '低代码表单引擎的状态管理拆解 / State Patterns for Builders' },
-  { date: '2025-12-21', title: '独立开发者如何做技术选型 / Building with Constraints' },
-]
-
-const navItems = [
-  { href: '#hero', label: 'Home' },
-  { href: '#stack', label: 'Stack' },
-  { href: '#projects', label: 'Projects' },
-  { href: '#blog', label: 'Blog' },
-  { href: '#contact', label: 'Contact' },
-]
+const cardRevealProps = {
+  ...revealProps,
+  viewport: { once: true, amount: 0.12 },
+}
 
 export default function Home() {
+  const sectionRefs = useRef({})
+  const activeSectionRef = useRef('hero')
+  const [activeSection, setActiveSection] = useState('hero')
+  const [lang, setLang] = useState('zh')
+
+  const t = homeI18n[lang]
+
   useEffect(() => {
-    const nodes = document.querySelectorAll('[data-reveal]')
-    const observer = new IntersectionObserver(
-      (entries) => {
-        entries.forEach((entry) => {
-          if (entry.isIntersecting) {
-            entry.target.classList.add('is-visible')
-            observer.unobserve(entry.target)
-          }
-        })
-      },
-      {
-        threshold: 0.16,
-        rootMargin: '0px 0px -8% 0px',
-      }
-    )
-
-    nodes.forEach((node) => observer.observe(node))
-
-    return () => observer.disconnect()
+    const saved = localStorage.getItem('lang')
+    if (saved === 'en' || saved === 'zh') setLang(saved)
   }, [])
+
+  useEffect(() => {
+    document.documentElement.lang = lang
+  }, [lang])
+
+  const toggleLang = (type) => {
+    const next = type
+    setLang(next)
+    localStorage.setItem('lang', next)
+  }
+
+  const setSectionRef = (key) => (node) => {
+    if (node) {
+      sectionRefs.current[key] = node
+    }
+  }
+
+  const scrollToSection = (key) => {
+    const target = sectionRefs.current[key]
+
+    if (!target) {
+      return
+    }
+
+    const navHeight = parseInt(
+      getComputedStyle(document.documentElement).getPropertyValue('--nav-height'),
+      10
+    ) || 72
+
+    const top = target.getBoundingClientRect().top + window.scrollY - navHeight - 24
+
+    window.scrollTo({
+      top: Math.max(0, top),
+      behavior: 'smooth',
+    })
+  }
+
+  const getCurrentSection = useCallback(() => {
+    const navHeight = parseInt(
+      getComputedStyle(document.documentElement).getPropertyValue('--nav-height'),
+      10
+    ) || 72
+
+    const checkpoint = window.scrollY + navHeight + 48
+    const sections = navItems
+      .map((item) => ({
+        key: item.key,
+        node: sectionRefs.current[item.key],
+      }))
+      .filter((section) => section.node)
+
+    let currentKey = sections[0]?.key || 'hero'
+
+    sections.forEach((section) => {
+      if (section.node.offsetTop <= checkpoint) {
+        currentKey = section.key
+      }
+    })
+
+    return currentKey
+  }, [])
+
+  const syncActiveSection = useCallback(() => {
+    const currentKey = getCurrentSection()
+
+    if (activeSectionRef.current !== currentKey) {
+      activeSectionRef.current = currentKey
+      setActiveSection(currentKey)
+    }
+  }, [getCurrentSection])
+
+  useEffect(() => {
+    const initialHash = window.location.hash.replace('#', '')
+    if (initialHash && sectionRefs.current[initialHash]) {
+      activeSectionRef.current = initialHash
+      setActiveSection(initialHash)
+      requestAnimationFrame(() => {
+        scrollToSection(initialHash)
+      })
+    } else {
+      activeSectionRef.current = getCurrentSection()
+      syncActiveSection()
+    }
+
+    const handleScroll = () => {
+      syncActiveSection()
+    }
+
+    const handleHashChange = () => {
+      const hash = window.location.hash.replace('#', '')
+
+      if (hash && sectionRefs.current[hash]) {
+        activeSectionRef.current = hash
+        setActiveSection(hash)
+        scrollToSection(hash)
+        return
+      }
+
+      syncActiveSection()
+    }
+
+    window.addEventListener('scroll', handleScroll, { passive: true })
+    window.addEventListener('hashchange', handleHashChange)
+
+    return () => {
+      window.removeEventListener('scroll', handleScroll)
+      window.removeEventListener('hashchange', handleHashChange)
+    }
+  }, [getCurrentSection, syncActiveSection])
 
   return (
     <>
       <Head>
-        <title>代码民工 | Frontend Developer / Indie Hacker</title>
-        <meta
-          name="description"
-          content="代码民工的个人品牌与作品展示站，聚焦前端开发、独立开发与现代 Web 产品构建。"
-        />
+        <title>{t.pageTitle}</title>
+        <meta name="description" content={t.metaDesc} />
         <meta name="viewport" content="width=device-width, initial-scale=1" />
       </Head>
 
       <div className="site-shell">
         <div className="noise-layer" aria-hidden="true" />
         <header className="site-nav">
-          <a className="brandmark" href="#hero">
-            <span className="brandmark__dot" />
-            <span>代码民工</span>
-          </a>
-          <nav className="nav-links" aria-label="Primary">
-            {navItems.map((item) => (
-              <a key={item.href} href={item.href}>
-                {item.label}
-              </a>
-            ))}
-          </nav>
+          <div className="nav-wrapper">
+            <button type="button" className="brandmark" onClick={() => scrollToSection('hero')}>
+              <span className="brandmark__dot" />
+              <span>{t.brand}</span>
+            </button>
+            <div style={{ display: 'flex', alignItems: 'center', gap: 5 }}>
+              <nav className="nav-links" aria-label="Primary">
+                {navItems.map((item) => (
+                  <button
+                    key={item.key}
+                    type="button"
+                    className={activeSection === item.key ? 'is-active' : ''}
+                    onClick={() => scrollToSection(item.key)}
+                  >
+                    {item[lang]}
+                  </button>
+                ))}
+              </nav>
+              <div className="lang-toggle" aria-label={t.languageSwitcher}>
+                <span onClick={() => toggleLang('zh')} className='lang-toggle__item' style={{ color: lang === 'zh' ? 'var(--text)' : 'var(--text-muted)' }}>中</span>
+                <span className="lang-toggle__sep">/</span>
+                <span onClick={() => toggleLang('en')} className='lang-toggle__item' style={{ color: lang === 'en' ? 'var(--text)' : 'var(--text-muted)' }}>EN</span>
+              </div>
+            </div>
+          </div>
         </header>
 
         <main>
-          <section id="hero" className="hero section">
+          <section id="hero" ref={setSectionRef('hero')} className="hero section">
             <div className="hero__glow hero__glow--cyan" aria-hidden="true" />
             <div className="hero__glow hero__glow--violet" aria-hidden="true" />
-            <div className="hero__copy" data-reveal>
+            <motion.div className="hero__copy" key={`hero-copy-${lang}`} {...revealProps}>
               <div className="hero-badge">
                 <span className="hero-badge__dot" />
-                <span>Available for selective freelance / shipping products</span>
+                <span>{t.badge}</span>
               </div>
-              <p className="eyebrow">Frontend Developer / Indie Hacker</p>
+              <p className="eyebrow">{t.eyebrow}</p>
               <h1>
-                代码民工
-                <span>构建有辨识度的 Web 产品界面与可持续迭代的前端系统。</span>
+                {t.brand}
+                <span>{t.heroSubtitle}</span>
               </h1>
-              <p className="hero__summary">
-                中文为主，兼顾 English context。专注 React / Next.js、后台系统、可视化和独立开发，追求清晰结构、克制动效与稳定交付。
-              </p>
+              <p className="hero__summary">{t.heroSummary}</p>
               <div className="hero__actions">
-                <a className="button button--primary" href="#projects">
-                  查看作品
-                </a>
+                <button
+                  type="button"
+                  className="button button--primary"
+                  onClick={() => scrollToSection('projects')}
+                >
+                  {t.ctaPrimary}
+                </button>
                 <a className="button button--ghost" href="mailto:suijiafeng@hotmail.com">
-                  联系我
+                  {t.ctaSecondary}
                 </a>
               </div>
-            </div>
+            </motion.div>
 
-            <aside className="terminal-card" data-reveal aria-label="Terminal introduction">
-              <div className="terminal-card__chrome">
-                <span className="mac-dot mac-dot--red" />
-                <span className="mac-dot mac-dot--yellow" />
-                <span className="mac-dot mac-dot--green" />
-              </div>
-              <div className="terminal-card__body">
-                <div>
-                  <span className="prompt">$</span> whoami
+            <div className="terminal-float-wrapper">
+              <motion.aside
+                className="terminal-card"
+                aria-label={t.terminalLabel}
+                key={`terminal-${lang}`}
+                {...revealProps}
+              >
+                <div className="terminal-card__chrome">
+                  <span className="mac-dot mac-dot--red" />
+                  <span className="mac-dot mac-dot--yellow" />
+                  <span className="mac-dot mac-dot--green" />
                 </div>
-                <div className="terminal-output">代码民工 / suijiafeng</div>
-                <div>
-                  <span className="prompt">$</span> cat profile.txt
+                <div className="terminal-card__body">
+                  <div>
+                    <span className="prompt">$</span> {t.terminalCommands.whoami}
+                  </div>
+                  <div className="terminal-output">{t.terminal.whoami}</div>
+                  <div>
+                    <span className="prompt">$</span> {t.terminalCommands.commits}
+                  </div>
+                  {t.terminal.commits.map((commit, index) => (
+                    <div key={index} className="terminal-output terminal-output--commit">
+                      <span className="terminal-hash">{commit.split(' ')[0]}</span> {commit.split(' ').slice(1).join(' ')}
+                    </div>
+                  ))}
+                  <div>
+                    <span className="prompt">$</span> {t.terminalCommands.focus}
+                  </div>
+                  <div className="terminal-output">{t.terminal.focus}</div>
+                  <div className="terminal-line">
+                    <span className="prompt">$</span> <span className="cursor" />
+                  </div>
                 </div>
-                <div className="terminal-output">Frontend Developer</div>
-                <div className="terminal-output">Indie Hacker</div>
-                <div className="terminal-output">Building for clarity, speed and edge delivery.</div>
-                <div>
-                  <span className="prompt">$</span> ls stack
-                </div>
-                <div className="terminal-output">React Next.js TypeScript Node.js PostgreSQL Cloudflare</div>
-                <div className="terminal-line">
-                  <span className="prompt">$</span> <span className="cursor" />
-                </div>
-              </div>
-            </aside>
+              </motion.aside>
+            </div>
           </section>
 
-          <section id="stack" className="section">
-            <div className="section-heading" data-reveal>
-              <p className="eyebrow">Tech Stack</p>
-              <h2>按能力域拆分，而不是堆砌关键词。</h2>
+          <section id="stack" ref={setSectionRef('stack')} className="section">
+            <div className="section-heading">
+              <p className="eyebrow">{t.sections.stack}</p>
+              <h2>{t.stackHeading}</h2>
+              <p className="section-heading__description">{t.stackDescription}</p>
             </div>
             <div className="stack-groups">
-              {techGroups.map((group) => (
-                <div key={group.title} className="stack-group" data-reveal>
+              {t.techGroups.map((group, groupIndex) => (
+                <motion.div
+                  key={`stack-group-${groupIndex}-${lang}`}
+                  className="stack-group"
+                  {...cardRevealProps}
+                >
                   <div className="stack-group__header">
                     <h3>{group.title}</h3>
-                    <span>{group.items.length.toString().padStart(2, '0')} items</span>
+                    <span>{group.items.length.toString().padStart(2, '0')} {t.itemCountSuffix}</span>
                   </div>
                   <div className="stack-grid">
-                    {group.items.map((item) => (
-                      <article key={item.name} className="skill-card">
+                    {group.items.map((item, itemIndex) => (
+                      <article key={`stack-item-${groupIndex}-${itemIndex}`} className="skill-card">
                         <div className="skill-card__top">
                           <div>
                             <h4>{item.name}</h4>
@@ -212,27 +269,47 @@ export default function Home() {
                           <span>{item.level}</span>
                         </div>
                         <div className="skill-bar">
-                          <span className="skill-bar__fill" data-reveal />
+                          <motion.span
+                            className="skill-bar__fill"
+                            style={{ '--level': (parseFloat(item.level) / 100).toFixed(2) }}
+                            initial={{ scaleX: 0 }}
+                            whileInView={{ scaleX: 'var(--level)' }}
+                            viewport={{ once: true, amount: 0.7 }}
+                            transition={{ duration: 1.2, ease: [0.16, 1, 0.3, 1] }}
+                          />
                         </div>
                       </article>
                     ))}
                   </div>
-                </div>
+                </motion.div>
               ))}
             </div>
           </section>
 
-          <section id="projects" className="section">
-            <div className="section-heading" data-reveal>
-              <p className="eyebrow">Projects</p>
-              <h2>偏业务、偏系统、偏交付的项目组合。</h2>
+          <section
+            id="projects"
+            ref={setSectionRef('projects')}
+            className="section"
+          >
+            <div className="section-heading">
+              <p className="eyebrow">{t.sections.projects}</p>
+              <h2>{t.projectsHeading}</h2>
+              <p className="section-heading__description">{t.projectsDescription}</p>
             </div>
             <div className="projects-grid">
-              {projects.map((project) => (
-                <article key={project.id} className="project-card" data-reveal>
-                  <span className="project-card__index">{project.id}</span>
-                  <h3>{project.title}</h3>
-                  <p>{project.description}</p>
+              {projects.map((project, i) => (
+                <motion.article
+                  key={project.id}
+                  className="project-card"
+                  {...cardRevealProps}
+                  transition={{
+                    duration: 0.7,
+                    ease: [0.16, 1, 0.3, 1],
+                    delay: (i % 3) * 0.08,
+                  }}
+                >
+                  <h3> {project[lang].title}</h3>
+                  <p className="project-card__description">{project[lang].description}</p>
                   <div className="tag-list">
                     {project.tags.map((tag) => (
                       <span key={tag} className="tag">
@@ -242,48 +319,108 @@ export default function Home() {
                   </div>
                   <div className="project-card__links">
                     <a href="https://github.com/suijiafeng" target="_blank" rel="noreferrer">
-                      GitHub
+                      {t.projectPrimaryLink}
                     </a>
-                    <a href="#contact">Demo</a>
+                    <button type="button" onClick={() => scrollToSection('contact')}>
+                      {t.projectSecondaryLink}
+                    </button>
                   </div>
-                </article>
+                </motion.article>
               ))}
             </div>
           </section>
 
-          <section id="blog" className="section">
-            <div className="section-heading" data-reveal>
-              <p className="eyebrow">Blog</p>
-              <h2>暂存的写作方向与占位文章列表。</h2>
+          <section
+            id="contact"
+            ref={setSectionRef('contact')}
+            className="section contact-section"
+          >
+            <div className="contact-header">
+              <p className="eyebrow">{t.contact.eyebrow}</p>
+              <h2>{t.contact.title}</h2>
+              <p className="contact-subtitle">
+                {t.contact.subtitle}
+              </p>
             </div>
-            <div className="blog-list">
-              {blogPosts.map((post) => (
-                <a key={post.date + post.title} className="blog-item" href="#contact" data-reveal>
-                  <time dateTime={post.date}>{post.date}</time>
-                  <span className="blog-item__title">{post.title}</span>
-                  <span className="blog-item__arrow" aria-hidden="true">
-                    ↗
-                  </span>
-                </a>
-              ))}
-            </div>
-          </section>
 
-          <section id="contact" className="section contact-section" data-reveal>
-            <p className="eyebrow">Contact</p>
-            <h2>如果你在做产品、后台系统、可视化或个人品牌站点，可以直接联系我。</h2>
-            <div className="contact-links">
-              <a href="mailto:suijiafeng@hotmail.com">suijiafeng@hotmail.com</a>
-              <a href="https://github.com/suijiafeng" target="_blank" rel="noreferrer">
-                github.com/suijiafeng
-              </a>
+            <div className="contact-content">
+              <div className="contact-primary">
+                <div className="contact-card">
+                  <div className="contact-card-meta">{t.contact.emailMeta}</div>
+                  <h3>{t.contact.emailCard.title}</h3>
+                  <p>{t.contact.emailCard.description}</p>
+                  <a href={`mailto:${t.contact.emailCard.link}`} className="contact-link">
+                    {t.contact.emailCard.link}
+                  </a>
+                </div>
+
+                <div className="contact-card">
+                  <div className="contact-card-meta">{t.contact.githubMeta}</div>
+                  <h3>{t.contact.githubCard.title}</h3>
+                  <p>{t.contact.githubCard.description}</p>
+                  <a href={`https://${t.contact.githubCard.link}`} target="_blank" rel="noreferrer" className="contact-link">
+                    {t.contact.githubCard.link}
+                  </a>
+                </div>
+              </div>
+
+              <div className="contact-extras">
+                <div className="contact-panel">
+                  <div className="contact-panel__title">{t.contact.fitTitle}</div>
+                  <div className="contact-chip-list">
+                    {t.contact.fitItems.map((item) => (
+                      <span key={item} className="contact-chip">
+                        {item}
+                      </span>
+                    ))}
+                  </div>
+                </div>
+
+                <div className="contact-panel">
+                  <div className="contact-panel__title">{t.contact.workflowTitle}</div>
+                  <div className="contact-list">
+                    {t.contact.workflowItems.map((item) => (
+                      <div key={item} className="contact-list__item">
+                        <span className="contact-list__dot" />
+                        <span>{item}</span>
+                      </div>
+                    ))}
+                  </div>
+                </div>
+              </div>
+
+              <div className="contact-secondary">
+                <div className="contact-info-item">
+                  <span className="info-marker" />
+                  <div>
+                    <div className="info-label">{t.contact.locationLabel}</div>
+                    <div className="info-value">{t.contact.location}</div>
+                  </div>
+                </div>
+
+                <div className="contact-info-item">
+                  <span className="info-marker" />
+                  <div>
+                    <div className="info-label">{t.contact.timezoneLabel}</div>
+                    <div className="info-value">{t.contact.timezone}</div>
+                  </div>
+                </div>
+
+                <div className="contact-info-item">
+                  <span className="info-marker" />
+                  <div>
+                    <div className="info-label">{t.contact.statusLabel}</div>
+                    <div className="info-value">{t.contact.status}</div>
+                  </div>
+                </div>
+              </div>
             </div>
           </section>
         </main>
 
         <footer className="site-footer">
-          <span>© 2026 代码民工</span>
-          <span>Built for Cloudflare Pages</span>
+          <span>{t.footerBrand}</span>
+          <span>{t.footerPlatform}</span>
         </footer>
       </div>
     </>
