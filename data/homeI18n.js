@@ -2,84 +2,108 @@ export const projects = [
   {
     id: '01',
     zh: {
-      title: '企业级权限管理系统',
-      description:
-        'RBAC+ABAC混合权限模型，精细化权限控制，从角色到数据级别的全方位安全保障。让复杂的企业组织架构变得简单可管理。',
+      title: '多租户后台权限系统',
+      caseType: '企业后台 / 权限平台',
+      problem: '团队规模扩大后，角色关系和权限层级迅速变复杂，传统人工维护方式既低效，也容易留下权限风险。',
+      role: '以前端负责人身份参与方案设计与交互落地，负责权限模型梳理、核心界面实现和关键流程体验优化。',
+      result: '系统可支撑千人规模组织结构，权限审批和配置成本显著下降，人工处理环节减少约 80%。',
     },
     en: {
-      title: 'Enterprise Access Control System',
-      description:
-        'A hybrid RBAC + ABAC model with fine-grained control from roles to data-level permissions, designed for complex enterprise access scenarios.',
+      title: 'Multi-tenant Access Control System',
+      caseType: 'Enterprise Admin / Access Control',
+      problem: 'As the organization grew, role relationships and permission layers became too complex for manual management, creating both inefficiency and security risk.',
+      role: 'Worked as the frontend lead across solution design and interaction delivery, covering permission model refinement, core UI implementation, and workflow usability.',
+      result: 'The system now supports 1,000+ organizational structures, with configuration and approval overhead reduced significantly and manual steps cut by around 80%.',
     },
     tags: ['Admin', 'RBAC', 'ABAC', 'React'],
   },
   {
     id: '02',
     zh: {
-      title: '低代码表单设计器',
-      description:
-        '拖拽式表单构建，自动生成JSON Schema，让运营人员也能轻松创建复杂表单。降低技术门槛，提升业务响应速度。',
+      title: '低代码表单引擎',
+      caseType: '配置平台 / 低代码工具',
+      problem: '业务侧频繁调整表单和配置流程，如果每次都依赖研发介入，响应速度和协作成本都会被不断放大。',
+      role: '负责拖拽式表单引擎的核心架构设计、JSON Schema 规范定义，以及关键编辑体验的实现。',
+      result: '表单配置能力向业务侧开放后，研发介入频率明显下降，自助配置覆盖大部分常见场景，相关需求减少约 60%。',
     },
     en: {
-      title: 'Low-Code Form Builder',
-      description:
-        'A drag-and-drop form builder with automatic JSON Schema generation, enabling operations teams to configure complex forms with lower engineering involvement.',
+      title: 'Low-Code Form Engine',
+      caseType: 'Low-Code / Configuration Platform',
+      problem: 'Frequent changes to forms and configuration flows created delivery bottlenecks when every adjustment depended on engineering support.',
+      role: 'Owned the core architecture of the drag-and-drop form engine, the JSON Schema definition model, and the implementation of the key editing experience.',
+      result: 'After opening configuration capability to the business side, most routine changes could be handled independently and related engineering requests dropped by about 60%.',
     },
     tags: ['LowCode', 'Schema', 'DnD', 'TypeScript'],
   },
   {
     id: '03',
     zh: {
-      title: '智能商品配置系统',
-      description:
-        '多规格SKU管理，笛卡尔积算法优化，电商复杂商品配置的完美解决方案。让商品管理既专业又简单。',
+      title: '电商 SKU 配置工作台',
+      caseType: '电商后台 / 配置工具',
+      problem: '多规格商品的组合关系复杂，人工维护 SKU 不仅效率低，还很容易在上架流程中产生配置错误。',
+      role: '负责 SKU 笛卡尔积生成逻辑、配置工作台核心交互以及关键操作链路的可用性优化。',
+      result: '商品配置和上架流程明显提速，整体效率提升约 3 倍，人工操作导致的错误率接近 0。',
     },
     en: {
-      title: 'Product Configuration System',
-      description:
-        'Supports multi-variant SKU management with Cartesian-product generation for complex e-commerce product configuration workflows.',
+      title: 'E-commerce SKU Config Workbench',
+      caseType: 'E-commerce Admin / Config Tool',
+      problem: 'Managing multi-variant products manually made SKU configuration slow, repetitive, and highly error-prone during the listing process.',
+      role: 'Built the Cartesian-product SKU generation logic, designed the main configuration workbench interactions, and optimized critical operation flows for usability.',
+      result: 'The configuration and listing workflow became roughly 3x faster, while manual-operation errors dropped to near zero.',
     },
     tags: ['E-commerce', 'Algorithm', 'SKU', 'Node.js'],
   },
   {
     id: '04',
     zh: {
-      title: '实时运营数据大屏',
-      description:
-        'ECharts + WebSocket实时数据可视化，异常指标智能预警，业务趋势一目了然。让数据驱动决策变得直观高效。',
+      title: '运营实时监控大屏',
+      caseType: '数据可视化 / 实时大屏',
+      problem: '核心运营数据分散在多个系统中，缺少统一视图和实时预警能力，导致异常发现和业务决策普遍滞后。',
+      role: '负责数据接入链路、图表表达设计、前端展示实现，以及异常预警逻辑的落地。',
+      result: '异常识别速度从小时级缩短到分钟级，数据反馈更及时，运营判断和响应效率明显提升。',
     },
     en: {
       title: 'Real-time Operations Dashboard',
-      description:
-        'Built with ECharts and WebSocket for real-time visualization, anomaly monitoring, and operational trend tracking in large-screen dashboards.',
+      caseType: 'Data Visualization / Large-screen Display',
+      problem: 'Key operations data was spread across multiple systems with no unified view or real-time alerting, which delayed anomaly detection and decision-making.',
+      role: 'Handled the data integration flow, chart expression design, frontend implementation, and the delivery of anomaly alert logic.',
+      result: 'Detection speed improved from hours to minutes, giving the operations team much faster feedback and response capability.',
     },
     tags: ['ECharts', 'WebSocket', 'Realtime', 'Dashboard'],
   },
   {
     id: '05',
     zh: {
-      title: '个人品牌展示平台',
-      description:
-        '你正在浏览的这个网站，Cloudflare Pages静态部署，极致性能与优雅设计。独立开发者的数字名片，技术与艺术的完美融合。',
+      title: '个人品牌获客站',
+      caseType: '品牌官网 / 静态站点',
+      problem: '普通作品集往往只能展示做过什么，却很难完整传达个人能力边界、专业判断和品牌辨识度。',
+      role: '独立完成信息架构、文案整理、视觉表达、前端实现与多语言支持，整体以个人品牌塑造为目标。',
+      result: '站点以轻量、清晰、可持续维护为原则完成交付，首屏加载控制在 1.5 秒内，并支持中英文切换。',
     },
     en: {
-      title: 'Personal Brand Website',
-      description:
-        'This site itself, deployed on Cloudflare Pages with a static-first approach, focused on performance, visual identity, and independent developer presentation.',
+      title: 'Personal Brand & Lead-gen Site',
+      caseType: 'Brand Website / Static Site',
+      problem: 'A typical portfolio can show past work, but it rarely communicates personal positioning, professional judgment, and brand identity in a clear way.',
+      role: 'Handled the full process independently, including information architecture, copy strategy, visual direction, frontend implementation, and bilingual support.',
+      result: 'Delivered as a lightweight and maintainable personal brand site, with first-screen loading under 1.5 seconds and smooth bilingual presentation.',
     },
-    tags: ['Portfolio', 'Cloudflare Pages', 'Static', 'UX'],
+    tags: ['Next.js', 'Cloudflare Pages', 'i18n', 'UX'],
   },
   {
     id: '06',
     zh: {
-      title: 'Web3数字钱包界面',
-      description:
-        'Ethers.js + MetaMask深度集成，ERC-20资产管理，区块链交易流程优化。让Web3交互变得简单直观。',
+      title: 'Web3 钱包前端',
+      caseType: '区块链 / DApp 前端',
+      problem: '链上操作本身就存在较高理解门槛，如果交互流程设计不够清晰，用户很容易在关键步骤中产生犹豫或误操作。',
+      role: '负责 Ethers.js 集成、钱包交互流程梳理，以及关键链上操作步骤的前端体验优化。',
+      result: '完成 ERC-20 资产管理相关能力支持后，核心操作路径更短、更清晰，主要交互步骤减少约 40%。',
     },
     en: {
-      title: 'Web3 Wallet Interface',
-      description:
-        'Integrated with Ethers.js and MetaMask to support ERC-20 asset interaction and core transaction flows in a Web3 frontend.',
+      title: 'Web3 Wallet Frontend',
+      caseType: 'Blockchain / DApp Frontend',
+      problem: 'Blockchain actions already carry a high cognitive barrier, and unclear interaction flows make hesitation and user error even more likely.',
+      role: 'Focused on Ethers.js integration, wallet interaction flow design, and the frontend simplification of critical on-chain actions.',
+      result: 'With ERC-20 asset management fully supported, the core paths became shorter and clearer, reducing the main interaction steps by about 40%.',
     },
     tags: ['Web3', 'Ethers.js', 'MetaMask', 'ERC-20'],
   },
@@ -87,23 +111,22 @@ export const projects = [
 
 export const navItems = [
   { key: 'hero', zh: '首页', en: 'Home' },
-  { key: 'stack', zh: '技术栈', en: 'Stack' },
-  { key: 'projects', zh: '项目', en: 'Projects' },
+  { key: 'cases', zh: '案例', en: 'Cases' },
   { key: 'contact', zh: '联系', en: 'Contact' },
 ]
 
 export const homeI18n = {
   zh: {
-    pageTitle: '代码民工 · 前端架构师 & 独立开发者',
+    pageTitle: '代码民工 · 前端工程师 & 独立开发者',
     metaDesc:
-      '代码民工的个人品牌与作品展示站，专注企业级前端工程、现代化Web架构与用户体验设计。打造有灵魂的数字产品，让技术服务于创意。',
+      '代码民工，前端工程师，专注复杂中后台、配置平台与数据可视化，兼顾工程质量、业务理解与产品体验。',
     brand: '代码民工',
-    badge: '🔥 热招项目 · 透明开发',
-    eyebrow: '前端架构师 / 独立开发者',
-    heroSubtitle: '用代码构建梦想，用设计诠释价值',
+    badge: '前端工程师 · 上海 · 开放交流与合作',
+    eyebrow: 'Frontend Engineer / Indie Developer',
+    heroSubtitle: '把复杂业务做清楚，把产品体验做完整',
     heroSummary:
-      '深耕 React / Next.js 生态，擅长构建高性能、可扩展的企业级前端应用。从复杂的后台管理系统到炫酷的数据可视化，从传统Web到前沿Web3，我致力于用技术解决真实世界的业务问题。相信好的设计能改变世界，好的代码能创造未来。',
-    ctaPrimary: '作品集',
+      '专注中后台系统、配置平台与数据可视化。我关心的不只是代码能跑，更关心结构是否稳定、交互是否顺手、产品是否真正可用。做过权限系统、低代码表单引擎、电商 SKU 配置工作台、实时运营大屏等复杂业务项目，习惯在业务复杂度、工程质量和产品完成度之间找到平衡。',
+    ctaPrimary: '查看案例',
     ctaSecondary: '联系我',
     languageSwitcher: '切换语言',
     languageLabelZh: '中',
@@ -120,49 +143,59 @@ export const homeI18n = {
       commits: 'git log --oneline -3',
       focus: 'echo $FOCUS',
     },
-    stackHeading: '技术能力全景图，精准匹配业务需求',
+    trustItems: [
+      { value: '6+', label: '复杂业务场景实践' },
+      { value: '0-1', label: '支持完整交付过程' },
+      { value: '工程 + 体验', label: '同时关注可维护性与完成度' },
+      { value: '双语', label: '支持中英文协作沟通' },
+    ],
+    stackHeading: '我的能力边界',
     stackDescription:
-      '围绕前端架构、数据系统与交付链路展开，不只是技术罗列，而是面向真实业务场景的能力组合。',
-    projectsHeading: '从概念到交付，完整的产品生命周期',
-    projectsDescription:
-      '这些项目覆盖后台系统、配置平台、数据可视化与个人品牌站点，重点体现复杂需求拆解与稳定交付能力。',
+      '围绕复杂前端系统展开，覆盖中后台工程、配置型产品、数据可视化与交付链路。我更在意这些能力能否在真实项目里形成稳定产出，而不只是停留在技术名词层面。',
+    casesHeading: '做过什么，解决了什么',
+    casesDescription:
+      '这些不是简单的技术罗列，而是我参与过的真实业务场景。我更希望用问题、职责和结果来说明自己做了什么。',
+    caseLabels: {
+      problem: '业务背景',
+      role: '我的职责',
+      result: '结果',
+    },
     itemCountSuffix: '项',
-    projectPrimaryLink: 'GitHub',
-    projectSecondaryLink: '联系',
+    casesContactLink: '如果你也在做这类项目，欢迎聊聊',
     contact: {
       eyebrow: '联系方式',
-      title: '让我们一起创造',
+      title: '可以聊项目，也可以只是打个招呼',
       subtitle:
-        '我始终对新的机会和激动人心的项目感兴趣。无论您有问题还是只是想打个招呼，请随时联系我。',
-      fitTitle: '更适合合作的项目',
+        '如果你正在做中后台系统、配置平台、数据可视化项目，或者只是想交流前端工程和产品实现上的问题，都欢迎联系我。',
+      fitTitle: '我更感兴趣的项目类型',
       fitItems: ['后台系统 / 工作台', '数据可视化 / 大屏', '低代码 / 配置平台', '品牌官网 / 作品站'],
-      workflowTitle: '合作方式',
-      workflowItems: ['需求梳理与方案对齐', '按阶段交付与同步进度', '支持远程协作与文档沉淀'],
+      workflowTitle: '通常的合作方式',
+      workflowItems: ['先对齐背景、范围和目标', '按阶段推进，过程透明', '支持远程协作，文档和代码可完整交接'],
       emailCard: {
-        title: '给我发邮件',
-        description: '给我发邮件讨论合作、机会，或只是聊聊技术。',
+        title: '发邮件',
+        description: '适合项目沟通、合作咨询，或者直接交流具体问题。',
         link: 'suijiafeng@hotmail.com',
       },
       githubCard: {
-        title: '查看我的作品',
-        description: '在GitHub上探索我的项目和贡献。',
+        title: '看看我的代码',
+        description: '如果你想更快了解我的实现风格、技术兴趣和项目痕迹，可以先从 GitHub 开始。',
         link: 'github.com/suijiafeng',
       },
       emailMeta: '邮箱',
       githubMeta: 'GitHub',
       locationLabel: '位置',
       timezoneLabel: '时区',
-      statusLabel: '状态',
+      statusLabel: '当前状态',
       location: '上海，中国',
       timezone: 'UTC+8 (CST)',
-      status: '可接受项目',
-      responseTime: '响应时间：通常在24小时内',
+      status: '开放交流与合作',
+      responseTime: '通常在 24 小时内回复',
     },
-    footerBrand: '© 2026 代码民工 · 让技术更有温度',
-    footerPlatform: '基于 Cloudflare Pages 构建',
+    footerBrand: '© 2026 代码民工 · 复杂业务前端 / 产品体验导向',
+    footerPlatform: 'Built with Next.js & Cloudflare Pages',
     terminal: {
       whoami: '代码民工 / suijiafeng',
-      focus: 'React · Next.js · Edge Delivery',
+      focus: 'Complex Frontend · Product-minded UI · Reliable Delivery',
       commits: [
         'feat: RBAC admin system v2',
         'feat: lowcode form builder',
@@ -175,22 +208,22 @@ export const homeI18n = {
         items: [
           {
             name: 'React / Next.js',
-            subtitle: '现代化React生态，SSR/SSG/RSC全栈支持，打造极致用户体验',
+            subtitle: '面向复杂业务场景构建稳定、可扩展的现代前端应用',
             level: '94%',
           },
           {
             name: 'Tailwind CSS',
-            subtitle: '原子化设计系统，高效构建美观一致的界面，设计与开发无缝衔接',
+            subtitle: '高效搭建一致的界面系统，兼顾开发效率与视觉完成度',
             level: '90%',
           },
           {
             name: 'TypeScript',
-            subtitle: '类型安全保障，构建可维护的大型前端应用，减少运行时错误',
+            subtitle: '用类型系统降低复杂项目中的认知成本和维护风险',
             level: '92%',
           },
           {
-            name: 'ECharts',
-            subtitle: '专业数据可视化，实时交互图表，业务数据一目了然',
+            name: 'ECharts/ReCharts',
+            subtitle: '把复杂业务数据转化为可读、可交互、可决策的可视化界面',
             level: '86%',
           },
         ],
@@ -198,47 +231,47 @@ export const homeI18n = {
       {
         title: '数据 & 部署',
         items: [
-          { name: 'Node.js', subtitle: '服务端渲染与自动化流程', level: '88%' },
+          { name: 'Node.js', subtitle: '支持服务端逻辑、构建流程和工程自动化', level: '88%' },
           {
             name: 'Prisma',
-            subtitle: '现代化ORM，类型安全数据库操作，优雅的数据建模体验',
+            subtitle: '用清晰的数据建模方式支撑复杂业务结构和后端协作',
             level: '82%',
           },
           {
             name: 'PostgreSQL',
-            subtitle: '企业级关系数据库，复杂查询优化，数据一致性保障',
+            subtitle: '理解关系型数据设计与查询能力在业务系统中的重要性',
             level: '84%',
           },
           {
             name: 'Docker',
-            subtitle: '容器化部署，环境一致性，本地开发与生产环境统一',
+            subtitle: '让开发、测试和部署环境更稳定，减少交付过程中的环境偏差',
             level: '79%',
           },
           {
             name: 'Git / GitHub',
-            subtitle: '版本控制最佳实践，代码审查，CI/CD自动化部署流程',
+            subtitle: '以版本管理、协作流程和持续交付保证工程质量',
             level: '91%',
           },
         ],
       },
     ],
     sections: {
-      stack: '技术栈',
-      projects: '参与项目',
+      stack: '能力',
+      cases: '案例',
     },
   },
   en: {
     pageTitle: '代码民工 · Frontend Engineer & Indie Developer',
     metaDesc:
-      'A portfolio site by 代码民工, focused on enterprise frontend engineering, modern web architecture, and user experience design.',
+      '代码民工, a frontend engineer focused on complex admin systems, configuration platforms, and data visualization, with equal attention to engineering quality, business clarity, and product experience.',
     brand: '代码民工',
-    badge: 'Open to Selected Projects · Transparent Delivery',
+    badge: 'Frontend Engineer · Shanghai · Open to Collaboration',
     eyebrow: 'Frontend Engineer / Indie Developer',
-    heroSubtitle: 'Building products with code, expressing value through design.',
+    heroSubtitle: 'Making complex business systems clear and product experiences complete',
     heroSummary:
-      'Focused on the React and Next.js ecosystem, with experience building high-performance and scalable frontend applications. My work spans admin systems, data visualization, and Web3 interfaces, with an emphasis on solving real product problems through solid engineering and clear interaction design.',
-    ctaPrimary: 'Explore My Work',
-    ctaSecondary: 'Get in Touch',
+      'I focus on admin systems, configuration platforms, and data visualization. I care not only about whether the code works, but whether the structure is maintainable, the interactions feel right, and the product is truly usable. My work includes access control systems, low-code form builders, e-commerce SKU tools, and real-time dashboards, with a consistent focus on balancing business complexity, engineering quality, and product experience.',
+    ctaPrimary: 'View Cases',
+    ctaSecondary: 'Say Hi',
     languageSwitcher: 'Switch language',
     languageLabelZh: 'ZH',
     languageLabelEn: 'EN',
@@ -254,34 +287,42 @@ export const homeI18n = {
       commits: 'git log --oneline -3',
       focus: 'echo $FOCUS',
     },
-    stackHeading:
-      'A capability map aligned with real product and engineering needs.',
+    trustItems: [
+      { value: '6+', label: 'complex business scenarios' },
+      { value: '0-1', label: 'full delivery involvement' },
+      { value: 'Engineering + UX', label: 'maintainability with product polish' },
+      { value: 'Bilingual', label: 'Chinese and English collaboration' },
+    ],
+    stackHeading: 'What I work across',
     stackDescription:
-      'Structured around frontend architecture, data systems, and delivery workflows, this section highlights practical capabilities rather than a simple list of tools.',
-    projectsHeading:
-      'Projects covering the full path from concept to delivery.',
-    projectsDescription:
-      'These projects span admin systems, configuration platforms, data visualization, and personal brand websites, with a focus on requirement decomposition and stable delivery.',
+      'My work centers on complex frontend systems, covering admin engineering, configuration-heavy products, data visualization, and delivery workflows. What matters to me is not the number of tools, but whether they lead to reliable outcomes in real projects.',
+    casesHeading: 'What I built and what it solved',
+    casesDescription:
+      'These are not just technology lists. They reflect real business contexts I worked in, explained through the problem, my role, and the outcome.',
+    caseLabels: {
+      problem: 'Context',
+      role: 'My Role',
+      result: 'Outcome',
+    },
     itemCountSuffix: 'items',
-    projectPrimaryLink: 'GitHub',
-    projectSecondaryLink: 'Contact',
+    casesContactLink: 'If you are building something similar, let’s talk',
     contact: {
       eyebrow: 'Get In Touch',
-      title: "Let's Build Together",
+      title: 'Happy to talk about projects or just say hello',
       subtitle:
-        'I am always open to interesting opportunities and meaningful projects. If you have a question, a product idea, or a potential collaboration, feel free to reach out.',
-      fitTitle: 'Best-fit project types',
-      fitItems: ['Admin systems / workbenches', 'Data visualization / dashboards', 'Low-code / configuration platforms', 'Brand websites / portfolios'],
+        'If you are working on admin systems, configuration platforms, data dashboards, or simply want to exchange ideas about frontend engineering and product implementation, feel free to reach out.',
+      fitTitle: 'Projects I am most interested in',
+      fitItems: ['Admin systems / workbenches', 'Data visualization / dashboards', 'Low-code / config platforms', 'Brand websites'],
       workflowTitle: 'How I usually work',
-      workflowItems: ['Clarify requirements and scope first', 'Deliver in phases with visible progress', 'Remote collaboration with clear documentation'],
+      workflowItems: ['Align on context, scope, and goals first', 'Move in phases with clear progress', 'Remote-friendly with complete docs and code handoff'],
       emailCard: {
-        title: 'Email Me',
-        description: 'Use email for project inquiries, collaboration opportunities, or technical discussions.',
+        title: 'Send an email',
+        description: 'Best for project discussions, collaboration inquiries, or specific technical topics.',
         link: 'suijiafeng@hotmail.com',
       },
       githubCard: {
-        title: 'View My Work',
-        description: 'Browse my projects and public contributions on GitHub.',
+        title: 'See my code',
+        description: 'If you want a quicker sense of how I build, think, and ship, GitHub is a good place to start.',
         link: 'github.com/suijiafeng',
       },
       emailMeta: 'Email',
@@ -291,14 +332,14 @@ export const homeI18n = {
       statusLabel: 'Status',
       location: 'Shanghai, China',
       timezone: 'UTC+8 (CST)',
-      status: 'Open to projects',
-      responseTime: 'Typical response time: within 24 hours',
+      status: 'Open to collaboration',
+      responseTime: 'Usually replies within 24 hours',
     },
-    footerBrand: '© 2026 代码民工 · Bringing more clarity to technology',
-    footerPlatform: 'Built for Cloudflare Pages',
+    footerBrand: '© 2026 代码民工 · Complex frontend systems, product-minded delivery',
+    footerPlatform: 'Built with Next.js & Cloudflare Pages',
     terminal: {
       whoami: '代码民工 / suijiafeng',
-      focus: 'React · Next.js · Edge Delivery',
+      focus: 'Complex Frontend · Product-minded UI · Reliable Delivery',
       commits: [
         'feat: RBAC admin system v2',
         'feat: lowcode form builder',
@@ -311,62 +352,60 @@ export const homeI18n = {
         items: [
           {
             name: 'React / Next.js',
-            subtitle: 'Modern React ecosystem with SSR, SSG, and RSC support for production-grade interfaces.',
+            subtitle: 'Building stable and scalable modern frontend applications for complex product scenarios',
             level: '94%',
           },
           {
             name: 'Tailwind CSS',
-            subtitle:
-              'Utility-first styling and design system implementation for fast and consistent UI delivery.',
+            subtitle: 'Creating consistent UI systems with both speed and visual finish in mind',
             level: '90%',
           },
           {
             name: 'TypeScript',
-            subtitle: 'Strong typing for large-scale frontend applications, maintainability, and safer refactoring.',
+            subtitle: 'Using types to reduce complexity and maintenance risk in larger projects',
             level: '92%',
           },
           {
             name: 'ECharts',
-            subtitle:
-              'Interactive data visualization for dashboards, monitoring, and business-facing analytics interfaces.',
+            subtitle: 'Turning operational data into interfaces that are readable, interactive, and decision-friendly',
             level: '86%',
           },
         ],
       },
       {
-        title: 'Backend & Data',
+        title: 'Data & Delivery',
         items: [
           {
             name: 'Node.js',
-            subtitle: 'Used for server-side rendering, automation workflows, and frontend-adjacent service integration.',
+            subtitle: 'Supporting server-side logic, build pipelines, and engineering automation',
             level: '88%',
           },
           {
             name: 'Prisma',
-            subtitle: 'Type-safe ORM for schema design, data modeling, and maintainable database access.',
+            subtitle: 'Working with clear data models to support complex business structures and backend collaboration',
             level: '82%',
           },
           {
             name: 'PostgreSQL',
-            subtitle: 'Relational database design, query optimization, and data consistency for business systems.',
+            subtitle: 'Understanding how relational data design supports serious business systems',
             level: '84%',
           },
           {
             name: 'Docker',
-            subtitle: 'Containerized deployment and environment consistency across local development and production.',
+            subtitle: 'Keeping development and deployment environments consistent across delivery stages',
             level: '79%',
           },
           {
             name: 'Git / GitHub',
-            subtitle: 'Version control, code review, and CI/CD-oriented collaboration workflows.',
+            subtitle: 'Using version control, collaboration flow, and delivery discipline to protect engineering quality',
             level: '91%',
           },
         ],
       },
     ],
     sections: {
-      stack: 'Tech Stack',
-      projects: 'Selected Projects',
+      stack: 'Capabilities',
+      cases: 'Cases',
     },
   },
 }

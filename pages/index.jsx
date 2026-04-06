@@ -305,6 +305,78 @@ export default function Home() {
             </div>
           </section>
 
+          <section className="trust-strip-section">
+            <div className="trust-strip section">
+              {t.trustItems.map((item, i) => (
+                <motion.div
+                  key={`trust-${i}-${lang}`}
+                  className="trust-item"
+                  {...revealProps}
+                  transition={{ duration: 0.6, ease: [0.16, 1, 0.3, 1], delay: i * 0.07 }}
+                >
+                  <span className="trust-item__value">{item.value}</span>
+                  <span className="trust-item__label">{item.label}</span>
+                </motion.div>
+              ))}
+            </div>
+          </section>
+
+          <section
+            id="cases"
+            ref={setSectionRef('cases')}
+            className="section"
+          >
+            <div className="section-heading">
+              <p className="eyebrow">{t.sections.cases}</p>
+              <h2>{t.casesHeading}</h2>
+              <p className="section-heading__description">{t.casesDescription}</p>
+            </div>
+            <div className="cases-grid">
+              {projects.map((project, i) => (
+                <motion.article
+                  key={project.id}
+                  className="case-card"
+                  {...cardRevealProps}
+                  transition={{
+                    duration: 0.7,
+                    ease: [0.16, 1, 0.3, 1],
+                    delay: (i % 2) * 0.08,
+                  }}
+                >
+                  <div className="case-card__meta">
+                    <span className="case-type">{project[lang].caseType}</span>
+                    <span className="case-id">{project.id}</span>
+                  </div>
+                  <h3>{project[lang].title}</h3>
+                  <div className="case-details">
+                    <div className="case-detail">
+                      <span className="case-detail__label">{t.caseLabels.problem}</span>
+                      <span className="case-detail__value">{project[lang].problem}</span>
+                    </div>
+                    <div className="case-detail">
+                      <span className="case-detail__label">{t.caseLabels.role}</span>
+                      <span className="case-detail__value">{project[lang].role}</span>
+                    </div>
+                    <div className="case-detail case-detail--result">
+                      <span className="case-detail__label">{t.caseLabels.result}</span>
+                      <span className="case-detail__value case-result">{project[lang].result}</span>
+                    </div>
+                  </div>
+                  <div className="tag-list">
+                    {project.tags.map((tag) => (
+                      <span key={tag} className="tag">{tag}</span>
+                    ))}
+                  </div>
+                  <div className="case-card__footer">
+                    <button type="button" className="case-cta" onClick={() => scrollToSection('contact')}>
+                      {t.casesContactLink}
+                    </button>
+                  </div>
+                </motion.article>
+              ))}
+            </div>
+          </section>
+
           <section id="stack" ref={setSectionRef('stack')} className="section">
             <div className="section-heading">
               <p className="eyebrow">{t.sections.stack}</p>
@@ -351,50 +423,6 @@ export default function Home() {
           </section>
 
           <section
-            id="projects"
-            ref={setSectionRef('projects')}
-            className="section"
-          >
-            <div className="section-heading">
-              <p className="eyebrow">{t.sections.projects}</p>
-              <h2>{t.projectsHeading}</h2>
-              <p className="section-heading__description">{t.projectsDescription}</p>
-            </div>
-            <div className="projects-grid">
-              {projects.map((project, i) => (
-                <motion.article
-                  key={project.id}
-                  className="project-card"
-                  {...cardRevealProps}
-                  transition={{
-                    duration: 0.7,
-                    ease: [0.16, 1, 0.3, 1],
-                    delay: (i % 3) * 0.08,
-                  }}
-                >
-                  <h3> {project[lang].title}</h3>
-                  <p className="project-card__description">{project[lang].description}</p>
-                  <div className="tag-list">
-                    {project.tags.map((tag) => (
-                      <span key={tag} className="tag">
-                        {tag}
-                      </span>
-                    ))}
-                  </div>
-                  <div className="project-card__links">
-                    <a href="https://github.com/suijiafeng" target="_blank" rel="noreferrer">
-                      {t.projectPrimaryLink}
-                    </a>
-                    <button type="button" onClick={() => scrollToSection('contact')}>
-                      {t.projectSecondaryLink}
-                    </button>
-                  </div>
-                </motion.article>
-              ))}
-            </div>
-          </section>
-
-          <section
             id="contact"
             ref={setSectionRef('contact')}
             className="section contact-section"
@@ -402,9 +430,7 @@ export default function Home() {
             <div className="contact-header">
               <p className="eyebrow">{t.contact.eyebrow}</p>
               <h2>{t.contact.title}</h2>
-              <p className="contact-subtitle">
-                {t.contact.subtitle}
-              </p>
+              <p className="contact-subtitle">{t.contact.subtitle}</p>
             </div>
 
             <div className="contact-content">
@@ -433,9 +459,7 @@ export default function Home() {
                   <div className="contact-panel__title">{t.contact.fitTitle}</div>
                   <div className="contact-chip-list">
                     {t.contact.fitItems.map((item) => (
-                      <span key={item} className="contact-chip">
-                        {item}
-                      </span>
+                      <span key={item} className="contact-chip">{item}</span>
                     ))}
                   </div>
                 </div>

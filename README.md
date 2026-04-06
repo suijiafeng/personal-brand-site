@@ -1,36 +1,64 @@
-This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
+# 个人品牌站
 
-## Getting Started
+一个面向客户获取的个人品牌主页，展示项目案例、技术栈与联系方式，支持中英双语切换。
 
-First, run the development server:
+## 技术栈
+
+- **框架**：Next.js 14（静态导出模式）
+- **样式**：Tailwind CSS + CSS Variables
+- **动效**：Framer Motion
+- **语言**：React 18 + JavaScript
+
+## 功能特性
+
+- 中英双语（`zh` / `en`）切换，语言偏好持久化至 `localStorage`
+- 暗色 / 亮色主题切换，读取系统偏好并支持手动覆盖
+- 平滑滚动导航，滚动时自动高亮当前区块
+- 项目案例、技术栈技能条、联系区块
+- 全站静态导出，可直接部署至任意静态托管平台
+
+## 本地开发
 
 ```bash
-npm run dev
-# or
+# 安装依赖
+yarn install
+
+# 启动开发服务器
 yarn dev
-# or
-pnpm dev
-# or
-bun dev
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+打开 [http://localhost:3000](http://localhost:3000) 查看效果。
 
-You can start editing the page by modifying `app/page.js`. The page auto-updates as you edit the file.
+## 构建与导出
 
-This project uses [`next/font`](https://nextjs.org/docs/basic-features/font-optimization) to automatically optimize and load Inter, a custom Google Font.
+```bash
+# 构建静态文件（输出至 dist/）
+yarn build
+```
 
-## Learn More
+构建产物位于 `dist/` 目录，可直接部署。
 
-To learn more about Next.js, take a look at the following resources:
+## 项目结构
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+```
+├── pages/
+│   ├── index.jsx        # 主页（单页应用）
+│   ├── _app.jsx         # 全局 App 配置
+│   └── _document.jsx    # 自定义 Document
+├── data/
+│   └── homeI18n.js      # 中英文案、项目数据、技术栈数据
+├── styles/
+│   └── globals.css      # 全局样式与 CSS 变量
+├── public/              # 静态资源
+└── next.config.js       # Next.js 配置（静态导出）
+```
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js/) - your feedback and contributions are welcome!
+## 内容维护
 
-## Deploy on Vercel
+所有页面文案、项目案例、技术栈数据均集中维护在 [data/homeI18n.js](data/homeI18n.js)，修改后重新构建即可生效。
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+## 部署
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/deployment) for more details.
+构建后将 `dist/` 目录上传至任意静态托管平台（Vercel、Netlify、GitHub Pages、Cloudflare Pages 等）。
+
+若部署在非根路径下，在 `next.config.js` 中取消 `basePath` 注释并填写对应路径。
